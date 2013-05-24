@@ -1,0 +1,1 @@
+umount /home/pi/usbmount
