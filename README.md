@@ -1,10 +1,9 @@
 raspberry-image-viewer
 ======================
 
-An automatic kiosk mode image viewer for Raspberry pi
+An automatic kiosk mode image viewer for Raspberry pi, Raspbian
 
-Image viewer that loads a predefined filename from an usb drive (if present) to disk and shows the image fullscreen 
-
+Image viewer that loads a predefined fileextension (.jpg) from an usb drive (if present) to disk and shows the image(s) fullscreen 
 
 Installation
 ------------
@@ -14,5 +13,3 @@ mkdir /home/pi/usbmount
 
 Todo
 ----
-
-* Add Error handling/detection of missing usb
