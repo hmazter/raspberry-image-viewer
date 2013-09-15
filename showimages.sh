@@ -12,8 +12,8 @@ then
 	echo "USB found, copying new images"
 
 	# remove all old files
-	rm $USBDIR/*.jpg
-	rm $USBDIR/*.png
+	rm $IMGDIR/*.jpg
+	rm $IMGDIR/*.png
 
 	# copy images
 	echo "copy *.jpg and *.png from USB"
@@ -26,7 +26,30 @@ fi
 echo "unmount usb"
 umount $USBDIR
 
-sleep 1
+sleep 2
 
-echo "showing 5 second slideshow with images/*.jpg images/*.png"
-/usr/bin/fbi -a -noverbose -t 5 $IMGDIR/*.jpg $IMGDIR/*.png
+filesstring=""
+
+# check for files in image dir
+jpgfiles=`ls -1 $IMGDIR/*.jpg 2>/dev/null | wc -l`
+pngfiles=`ls -1 $IMGDIR/*.png 2>/dev/null | wc -l`
+
+if [ $jpgfiles = 0 ] ; then
+	if [ $pngfiles = 0 ] ; then
+		echo "no images files found, aborting"
+		exit 0
+	fi
+fi 
+
+if [ $jpgfiles != 0 ]; then 
+	echo "found jpg"
+	filesstring="$filesstring $IMGDIR/*.jpg"
+fi
+
+if [ $pngfiles != 0 ]; then 
+	echo "found png"
+	filesstring="$filesstring $IMGDIR/*.png"
+fi
+
+echo "showing 5 second slideshow with $filesstring"
+/usr/bin/fbi -a -noverbose -t 5  $filesstring
